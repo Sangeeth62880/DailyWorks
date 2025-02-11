@@ -1,7 +1,7 @@
-# Ignore macOS system files
+# macOS system files
 .DS_Store
 
-# Ignore user directories and personal files
+# User directories and config files
 .CFUserTextEncoding
 .zsh_history
 .vscode/
@@ -13,4 +13,19 @@ Desktop/
 Documents/
 Pictures/
 Public/
+
+# Node.js dependencies
+node_modules/
+package-lock.json
+
+# Dart and Flutter files
+.dart-tool/
+.dart/
+.flutter/
+.flutter-devtools/
+.dartServer/
+.pub-cache/
+
+# Git-related files
+.gitconfig
 
