@@ -1,0 +1,16 @@
+# Ignore macOS system files
+.DS_Store
+
+# Ignore user directories and personal files
+.CFUserTextEncoding
+.zsh_history
+.vscode/
+Library/
+Movies/
+Music/
+Downloads/
+Desktop/
+Documents/
+Pictures/
+Public/
+
