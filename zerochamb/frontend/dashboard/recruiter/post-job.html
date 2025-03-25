@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post a Job - ZeroChamb</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/jobs.css">
+</head>
+<body class="recruiter-dashboard">
+    <div class="dashboard-layout">
+        <!-- Sidebar remains the same as in index.html, but update active state -->
+        <aside class="dashboard-sidebar">
+            <!-- Same sidebar code as index.html but with "Post a Job" link active -->
+            <!-- You can include this using a template system in production -->
+        </aside>
+
+        <main class="dashboard-main">
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h2>Post a Job</h2>
+                    <span class="current-time" id="currentTime">2025-03-20 08:43:39</span>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="notification-btn">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge">3</span>
+                        </button>
+                        <div class="user-menu">
+                            <button class="user-menu-btn">
+                                <img src="https://ui-avatars.com/api/?name=Sangeeth62880&background=0D8ABC&color=fff" 
+                                     alt="Profile">
+                                <span>Sangeeth62880</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <form id="jobPostForm" class="job-post-form">
+                    <div class="form-section">
+                        <h3>Basic Information</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="jobTitle">Job Title*</label>
+                                <input type="text" id="jobTitle" name="jobTitle" required 
+                                       placeholder="e.g., Senior Software Engineer">
+                            </div>
+                            <div class="form-group">
+                                <label for="department">Department*</label>
+                                <input type="text" id="department" name="department" required 
+                                       placeholder="e.g., Engineering">
+                            </div>
+                            <div class="form-group">
+                                <label for="location">Location*</label>
+                                <input type="text" id="location" name="location" required 
+                                       placeholder="e.g., New York, NY">
+                            </div>
+                            <div class="form-group">
+                                <label for="employmentType">Employment Type*</label>
+                                <select id="employmentType" name="employmentType" required>
+                                    <option value="">Select type</option>
+                                    <option value="full-time">Full-time</option>
+                                    <option value="part-time">Part-time</option>
+                                    <option value="contract">Contract</option>
+                                    <option value="internship">Internship</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Compensation</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="salaryMin">Minimum Salary</label>
+                                <input type="number" id="salaryMin" name="salaryMin" 
+                                       placeholder="e.g., 50000">
+                            </div>
+                            <div class="form-group">
+                                <label for="salaryMax">Maximum Salary</label>
+                                <input type="number" id="salaryMax" name="salaryMax" 
+                                       placeholder="e.g., 80000">
+                            </div>
+                            <div class="form-group">
+                                <label for="currency">Currency</label>
+                                <select id="currency" name="currency">
+                                    <option value="USD">USD</option>
+                                    <option value="EUR">EUR</option>
+                                    <option value="GBP">GBP</option>
+                                    <option value="INR">INR</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="benefits">Benefits</label>
+                                <input type="text" id="benefits" name="benefits" 
+                                       placeholder="e.g., Health insurance, 401k, Remote work">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Job Description</h3>
+                        <div class="form-group">
+                            <label for="description">Job Description*</label>
+                            <textarea id="description" name="description" rows="6" required 
+                                    placeholder="Describe the role, responsibilities, and ideal candidate..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="requirements">Requirements*</label>
+                            <textarea id="requirements" name="requirements" rows="6" required 
+                                    placeholder="List the required skills, experience, and qualifications..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Additional Details</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="experienceLevel">Experience Level</label>
+                                <select id="experienceLevel" name="experienceLevel">
+                                    <option value="">Select level</option>
+                                    <option value="entry">Entry Level</option>
+                                    <option value="intermediate">Intermediate</option>
+                                    <option value="senior">Senior</option>
+                                    <option value="executive">Executive</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="deadline">Application Deadline</label>
+                                <input type="date" id="deadline" name="deadline">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Screening Questions</h3>
+                        <div id="screeningQuestions" class="screening-questions">
+                            <!-- Questions will be added here dynamically -->
+                        </div>
+                        <button type="button" id="addQuestion" class="btn btn-outline">
+                            <i class="fas fa-plus"></i> Add Question
+                        </button>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" id="saveDraft">Save as Draft</button>
+                        <button type="submit" class="btn btn-primary">Post Job</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="/js/utils.js"></script>
+    <script src="/js/dashboard.js"></script>
+    <script src="/js/jobs.js"></script>
+</body>
+</html>
