@@ -30,23 +30,27 @@ export async function registerUser(formData: FormData) {
     const { users } = await getCollections()
 
     // Check if user already exists
-    const existingUser = await users.findOne({ email })
+    const existingUser = await users.findOne({ 
+      email: email.toLowerCase() 
+    })
 
     if (existingUser) {
       return {
-        error: "Email already in use",
+        error: "Email already registered",
       }
     }
 
     // Hash password
-    const hashedPassword = await hash(password, 10)
+    const hashedPassword = await hash(password, 12)
 
     // Create user
     const newUser = {
       name,
-      email,
+      email: email.toLowerCase(),
       password: hashedPassword,
       role: "user",
+      rating: 0,
+      jobsCompleted: 0,
       createdAt: new Date(),
       updatedAt: new Date(),
     }
@@ -57,10 +61,9 @@ export async function registerUser(formData: FormData) {
       success: true,
     }
   } catch (error) {
-    console.error("Error registering user:", error)
+    console.error("Registration error:", error)
     return {
       error: "Failed to register. Please try again.",
     }
   }
 }
-

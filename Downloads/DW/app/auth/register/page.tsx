@@ -66,7 +66,7 @@ export default function RegisterPage() {
       setIsLoading(false)
     }
   }
-
+  
   const handleGithubSignIn = () => {
     signIn("github", { callbackUrl: "/dashboard" })
   }

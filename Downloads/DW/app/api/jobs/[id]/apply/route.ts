@@ -2,6 +2,8 @@ import { type NextRequest, NextResponse } from "next/server"
 import { getCollections } from "@/lib/db"
 import { ObjectId } from "mongodb"
 import { getServerAuthSession } from "@/lib/auth"
+import { OptionalId } from "mongodb";
+import { Application } from "@/lib/db/models";
 
 export async function POST(request: NextRequest, { params }: { params: { id: string } }) {
   try {
@@ -22,7 +24,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
     }
 
     // Check if job exists
-    const job = await jobs.findOne({ _id: new ObjectId(jobId) })
+    const job = await jobs.findOne({ _id: new ObjectId(jobId).toString() })
 
     if (!job) {
       return NextResponse.json({ error: "Job not found" }, { status: 404 })
@@ -39,7 +41,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
     }
 
     // Create application
-    const application = {
+    const application: OptionalId<Application> = {
       jobId: jobId,
       userId: userId,
       status: "pending",
@@ -51,7 +53,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
     const result = await applications.insertOne(application)
 
     // Update job applicants
-    await jobs.updateOne({ _id: new ObjectId(jobId) }, { $push: { applicants: userId } })
+    await jobs.updateOne({ _id: new ObjectId(jobId).toString() }, { $push: { applicants: userId } })
 
     return NextResponse.json({
       application: { ...application, _id: result.insertedId },

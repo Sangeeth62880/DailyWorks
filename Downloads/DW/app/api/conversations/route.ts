@@ -29,7 +29,7 @@ export async function GET(request: NextRequest) {
 
         // Get user details
         const otherUser = await users.findOne(
-          { _id: new ObjectId(otherParticipantId) },
+          { _id: new ObjectId(otherParticipantId).toString() },
           { projection: { name: 1, image: 1 } },
         )
 

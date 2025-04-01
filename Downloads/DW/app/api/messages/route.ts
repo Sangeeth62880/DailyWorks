@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
 
     // Check if conversation exists
     const conversation = await conversations.findOne({
-      _id: new ObjectId(conversationId),
+      _id: new ObjectId(conversationId).toString(),
       participants: { $all: [session.user.id, receiverId] },
     })
 
@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
 
     // Update conversation with last message
     await conversations.updateOne(
-      { _id: new ObjectId(conversationId) },
+      { _id: new ObjectId(conversationId).toString() },
       {
         $set: {
           lastMessage: content,

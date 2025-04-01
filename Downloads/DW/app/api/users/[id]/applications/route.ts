@@ -31,7 +31,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
     // Get job details for each application
     const applicationsWithJobs = await Promise.all(
       userApplications.map(async (application) => {
-        const job = await jobs.findOne({ _id: new ObjectId(application.jobId) })
+        const job = await jobs.findOne({ _id: new ObjectId(application.jobId).toString() })
 
         return {
           ...application,

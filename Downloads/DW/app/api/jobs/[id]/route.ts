@@ -12,14 +12,14 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
       return NextResponse.json({ error: "Invalid job ID" }, { status: 400 })
     }
 
-    const job = await jobs.findOne({ _id: new ObjectId(jobId) })
+    const job = await jobs.findOne({ _id: new ObjectId(jobId).toString() })
 
     if (!job) {
       return NextResponse.json({ error: "Job not found" }, { status: 404 })
     }
 
     // Get creator info
-    const creator = await users.findOne({ _id: new ObjectId(job.createdBy) }, { projection: { name: 1, rating: 1 } })
+    const creator = await users.findOne({ _id: new ObjectId(job.createdBy).toString() }, { projection: { name: 1, rating: 1 } })
 
     return NextResponse.json({
       job: {
@@ -50,7 +50,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     // Add updatedAt timestamp
     validUpdateData.updatedAt = new Date()
 
-    const result = await jobs.updateOne({ _id: new ObjectId(jobId) }, { $set: validUpdateData })
+    const result = await jobs.updateOne({ _id: jobId }, { $set: validUpdateData })
 
     if (result.matchedCount === 0) {
       return NextResponse.json({ error: "Job not found" }, { status: 404 })
@@ -75,7 +75,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
       return NextResponse.json({ error: "Invalid job ID" }, { status: 400 })
     }
 
-    const result = await jobs.deleteOne({ _id: new ObjectId(jobId) })
+    const result = await jobs.deleteOne({ _id: new ObjectId(jobId).toString() })
 
     if (result.deletedCount === 0) {
       return NextResponse.json({ error: "Job not found" }, { status: 404 })
